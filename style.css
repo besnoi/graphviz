@@ -21,10 +21,10 @@ canvas {
 .dropdown-menu{
   position: absolute;
   top: 43px;
-  left: 32px;
-  z-index: 200004;
+  left: 76px;
+  z-index: 100;
   float: left;
-  min-width: 10rem;
+  min-width: 8.5rem;
   padding: .5rem 0;
   margin: .125rem 0 0;
   font-size: 1rem;
@@ -40,7 +40,7 @@ canvas {
 button.dropdown-item {
   display: block;
   width: 100%;
-  padding: .25rem 1.5rem;
+  padding: .25rem 1rem;
   clear: both;
   font-weight: 400;
   color: #212529;
@@ -54,14 +54,31 @@ button.dropdown-item {
   vertical-align: middle;
 }
 
+
+
 @media (max-width: 670px){
   #toolbar .btn {
       padding: .375rem .41rem;
   }
-  #toolbar .btn:nth-child(n+9) { display:none; }
+  
+  .dropdown-menu{
+    left:45px
+  }
 }
 
-@media (max-width: 520px){
+@media (max-width: 410px){
+  #toolbar .btn:last-child {
+      display:none;
+  }
+}
+
+@media (max-width: 370px){
+  #toolbar .btn:nth-child(6) {
+      display:none;
+  }
+}
+
+@media (max-width: 420px){
   #toolbar {
       padding-left: 10px;
   }

@@ -2,45 +2,49 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Graph Editor V.1.0</title>
-    <meta name="description" content="GraphEditor is a simple tool which allows you to visualise graphs and networks">
+    <title>GraphViz V.1.0</title>
+    <meta name="description" content="GraphViz is a simple tool which allows you to visualise graphs and networks">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="TODO .JPG">
-    <meta property="og:url" content="TODO github.io/url">
-    <meta property="og:title" content="GraphEditor: Visualize Graphs Online">
-    <meta property="og:description" content="GraphEditor lets you visualize graphs"
+    <!-- <meta property="og:image" content="TODO .JPG"> -->
+    <meta property="og:url" content="https://besnoi.github.io/GraphViz">
+    <meta property="og:title" content="GraphViz: Visualize Graphs Online">
+    <meta property="og:description" content="GraphViz lets you visualize and play with graphs"
     <meta name="theme-color" content="#ffffff">
-    <!-- <link rel="icon" type="image/png" sizes="32x32" href="TODO -32x32.png"> -->
+    <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"> -->
-    <!-- <link rel="stylesheet" href="assets/MaterialIconsOutlined.css"> -->
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-    <script src="assets/p5.js"></script>
-    <script src="main.js"></script>
-    <script src="sketch.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="js/prompt.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/sketch.js"></script>
 </head>
 
 <body>
     <div class="dropdown-menu" aria-labelledby="editMenu" style="display: none;">
-        <button class="dropdown-item" type="button" onclick="createPath(10)"><i class="material-symbols-outlined">line</i> Path</button>
-        <button class="dropdown-item" type="button" onclick="createCycle(3)"><i class="material-symbols-outlined">circle</i> Cycle</button>
-        <div class="dropdown-divider"></div>
-        <button class="dropdown-item" type="button" onclick="createCompleteGraph(5)"><i class="material-symbols-outlined">change_history</i> Complete Graph</button>
-        <button class="dropdown-item" type="button" onclick="createEmptyGraph(7)"><i class="material-symbols-outlined">content_copy</i> Empty Graph</button>
-        <button class="dropdown-item" type="button" onclick="createBiclique(4,5)"><i class="material-symbols-outlined">share</i> Biclique</button>
-        <div class="dropdown-divider"></div>
-        <button class="dropdown-item" type="button" onclick="Del()"><i class="material-symbols-outlined">clear</i> Delete</button>
-        <button class="dropdown-item" type="button" onclick="SelectAll()"><i class="material-symbols-outlined">select_all</i> Select All</button>
-        </div>
-    <div id="toolbar" class="btn-group" role="group" aria-label="Toolbar">
-        <button type="button" title="Add Graph" onclick="toggleDropDown()" class="btn btn-light"><i class="material-symbols-outlined">folder_open</i></button>
-        <button type="button" title="Add Node" onclick="newNode()" class="btn btn-light"><i class="material-symbols-outlined">add_circle</i></button>
-        <button type="button" title="Share text" onclick="switchEditMode()" class="btn btn-light"><i class="material-symbols-outlined">edit</i></button>
-        <button type="button" title="Cut" onclick="" class="btn btn-light"><i class="material-symbols-outlined">content_cut</i></button>
-        <button type="button" title="Copy" onclick="" class="btn btn-light"><i class="material-symbols-outlined">content_copy</i></button>
-        <button type="button" title="Paste" onclick="" class="btn btn-light"><i class="material-symbols-outlined">content_paste</i></button>
-        <button type="button" title="Undo" onclick="Undo()" class="btn btn-light"><i class="material-symbols-outlined">undo</i></button>
-        <button type="button" title="Clear" onclick="clscv()" class="btn btn-light"><i class="material-symbols-outlined">delete</i></button>
+        <button class="dropdown-item" type="button" onclick="prompt.inputModal('Insert Path',['Path Length'],createPath)"><i class="material-symbols-outlined">remove</i> Path</button>
+        <button class="dropdown-item" type="button" onclick="prompt.inputModal('Insert Cycle',['Cycle Length'],createCycle)""><i class="material-symbols-outlined">hexagon</i> Cycle</button>
+        <button class="dropdown-item" type="button" onclick="prompt.inputModal('Insert Complete Graph',['No Of Vertices'],createCompleteGraph)"><i class="material-symbols-outlined">change_history</i> Complete</button>
+        <button class="dropdown-item" type="button" onclick="prompt.inputModal('Insert Empty Graph',['No Of Vertices'],createEmptyGraph)"><i class="material-symbols-outlined">drag_indicator</i> Empty</button>
+        <button class="dropdown-item" type="button" onclick="prompt.inputModal('Insert Biclique',['#Vertices for First Graph','#Vertices for Second Graph'],createBiclique)"><i class="material-symbols-outlined">share</i> Biclique</button>
     </div>
+    <div id="toolbar" class="btn-group" role="group" aria-label="Toolbar">
+        <button type="button" title="Add Node" onclick="newNode()" class="btn btn-light"><i class="material-symbols-outlined">add_circle</i></button>
+        <button type="button" title="Add Sub-Graph" onclick="toggleDropDown()" class="btn btn-light"><i class="material-symbols-outlined">expand_more</i></button>
+
+        <button type="button" title="Edit Edges" onclick="enterEditMode()" class="btn btn-light"><i class="material-symbols-outlined">edit</i></button>
+        <button type="button" title="Delete Nodes/Edges" onclick="enterDeleteMode()" class="btn btn-light"><i class="material-symbols-outlined">check_box_outline_blank</i></button>
+        <button type="button" title="Move Nodes" onclick="enterMoveMode()" class="btn btn-light"><i class="material-symbols-outlined">open_with</i></button>
+        <button type="button" title="Offset Canvas" onclick="prompt.inputModal('Offset Canvas',['Horizontal offset (x)','Vertical Offset (y)'],offsetCanvas)" class="btn btn-light"><i class="material-symbols-outlined">subdirectory_arrow_right</i></button>
+        <button type="button" title="Download Graph" onclick="downloadCanvas()" class="btn btn-light"><i class="material-symbols-outlined">download</i></button>
+        <button type="button" title="Clear" onclick="clscv()" class="btn btn-light"><i class="material-symbols-outlined">delete</i></button>
+        <button type="button" title="About" onclick="prompt.message('About',
+          `GraphViz v1.0 <br>© Neir 2022<br><br>For Contributing, see <a style='text-decoration: underline;' href='https://besnoi.github.io/GraphViz'>source</a> !`)"
+          class="btn btn-light"><i class="material-symbols-outlined">info</i></button>
+    </div>
+
 </body>
