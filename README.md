@@ -1,4 +1,4 @@
-# ![hello](https://raw.githubusercontent.com/besnoi/graphviz/main/icon.png) GraphViz
+# ![logo](img/icon48x48.jpg) GraphViz
 A Simple Graph Visualizer for the Web
 
 <p align="center">
@@ -13,9 +13,10 @@ A Simple Graph Visualizer for the Web
 - Download graphboard as JPG
 
 
-### TODO
+### Todo List
 
 - Add more sub-graphs
 - Option to add nodes analytically
 - Option for Bezier-Curves for edges
+- Graph Coloring
 - Release URL
